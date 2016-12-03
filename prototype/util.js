@@ -1,4 +1,4 @@
-const sides = ['front', 'top', 'left', 'back', 'bottom', 'right']
+const sides = ['front', 'top', 'left', 'back', 'bottom', 'right'];
 
 function padStart(s,l) {
     return Array(l - s.length).join(' ') + s;
