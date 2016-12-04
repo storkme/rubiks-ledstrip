@@ -168,33 +168,33 @@ void rotateSide(int *c, int *c1, int o) {
   c[o + 7] = c1[o + 5];
 }
 
+void (*cubeFns[12])(int *c, int *c1);
+
 void setup() {
   pixels.begin();
+  cubeFns[0] = f;
+  cubeFns[1] = r;
+  cubeFns[2] = l;
+  cubeFns[3] = u;
+  cubeFns[4] = b;
+  cubeFns[5] = d;
+  cubeFns[6] = fi;
+  cubeFns[7] = ri;
+  cubeFns[8] = bi;
+  cubeFns[9] = li;
+  cubeFns[10] = di;
+  cubeFns[11] = ui;
 }
 
 void loop() {
-
-    // R' U' R' F' U F U' R' F R F' U' R U2 R
-  char pattern[] = "rrruuurrrfffufuuurrrfrfffuuuruur";
   //frame counter
-  t = t + 1;
-  if (t == strlen(pattern)) {
-    t = 0;
-  }
 
   int c1[54] = {};
   memcpy(c1, c, sizeof(c));
-  char cur = pattern[t];
-  
+
   //could probably use function pointers here but i'm not good at c
-  if(cur == 'r') {
-    r(c1, c);
-  } else if (cur == 'u') {
-    u(c1, c);
-  } else if(cur = 'f') {
-    f(c1, c);
-  }
-  
+  cubeFns[random(0,12)](c1, c);
+
   for (int i=0; i<6; i++) {
     for(int j=0;j<9;j++) {
       int colorIdx = c[i * 9 + j];
@@ -203,13 +203,9 @@ void loop() {
       }
     }
   }
-  
+
   pixels.show();
-  
-  delay(500);
-  //pause once we've arrived back at the 'solved' state
-  if(t == 0) {
-     delay(2000);
-  }
+
+//  delay(30);
 }
 

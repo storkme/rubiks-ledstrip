@@ -159,3 +159,14 @@ module.exports.moves = {
     l_: c => thrice(module.exports.moves.l, c),
     r_: c => thrice(module.exports.moves.r, c),
 };
+
+module.exports.cube = () => {
+    return [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, //front
+        1, 1, 1, 1, 1, 1, 1, 1, 1, //top
+        2, 2, 2, 2, 2, 2, 2, 2, 2, //left
+        3, 3, 3, 3, 3, 3, 3, 3, 3, //back
+        4, 4, 4, 4, 4, 4, 4, 4, 4, //bottom
+        5, 5, 5, 5, 5, 5, 5, 5, 5 //right
+    ];
+};
