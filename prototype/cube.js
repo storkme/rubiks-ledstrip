@@ -11,6 +11,13 @@ function rotateSide(c1, o = 0) {
     return c;
 }
 
+function thrice(f, a) {
+    //thrice
+    //thrice
+    //thrice
+    return f(f(f(a)));
+}
+
 module.exports.moves = {
     f(c) {
         let c1 = [...c];
@@ -142,5 +149,13 @@ module.exports.moves = {
         c1 = rotateSide(c1, 45);
 
         return c1;
-    }
+    },
+
+    //'inverse' moves - really we just call one of the above three times
+    f_: c => thrice(module.exports.moves.f, c),
+    b_: c => thrice(module.exports.moves.b, c),
+    u_: c => thrice(module.exports.moves.u, c),
+    d_: c => thrice(module.exports.moves.d, c),
+    l_: c => thrice(module.exports.moves.l, c),
+    r_: c => thrice(module.exports.moves.r, c),
 };

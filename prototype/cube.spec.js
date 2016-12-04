@@ -138,6 +138,12 @@ describe('a sampling of 2-moves', () => {
     });
 });
 
+describe('calling a move and its inverse should cancel out', () => {
+    const checkMove = m => it(m, () => assert.deepEqual(moves[m](moves[`${m}_`](c)), c));
+
+    'frulbd'.split('').forEach(checkMove);
+});
+
 describe('calling a single function four times should have no effect', () => {
     it('f', () => {
         let c1 = c.slice();
@@ -265,7 +271,7 @@ describe('manually entered sequences...', () => {
         assert.deepEqual(result, expected);
     });
     it('uu', () => {
-        let {u,r} = moves;
+        let {u, r} = moves;
         assert.deepEqual(u(u(r(r(r(r(u(u(c)))))))), c);
     });
 });
@@ -283,4 +289,11 @@ describe('some identity seq sum1 gave me', () => {
 
         assert.deepEqual(result, c);
     });
+
+    it('r_u_r_f_ufu_r_frf_u_ruur', () => {
+        let result = ['r_', 'u_', 'r_', 'f_', 'u', 'f', 'u_', 'r_', 'f', 'r', 'f_', 'u_', 'r', 'u', 'u', 'r']
+            .reduce((a, n) => moves[n](a), c);
+
+        assert.deepEqual(result, c);
+    })
 });
